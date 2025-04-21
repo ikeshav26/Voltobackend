@@ -6,9 +6,14 @@ import router from './routes/routes.js';
 
 const app = express();
 dotenv.config();
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 
 const PORT = process.env.Port || 3000;
 const URI = process.env.MOBGODB_URI || "mongodb://localhost:27017/Volto";
+
+
 
 mongoose.connect(URI,{
     useNewurlParser: true,
@@ -18,7 +23,11 @@ mongoose.connect(URI,{
 })
 
 
-app.use('/',router);
+
+
+
+app.use('/user',router);
+
 
 
 
