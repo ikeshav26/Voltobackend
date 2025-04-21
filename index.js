@@ -2,9 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import router from './routes/routes.js';
+import cors from 'cors';
 
 
 const app = express();
+app.use(cors());
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -26,7 +28,11 @@ mongoose.connect(URI,{
 
 
 
-app.use('/user',router);
+app.use('/',router);
+
+app.get('/',(req,res) => {
+    res.send("Hello from the Volto backend")
+})
 
 
 
